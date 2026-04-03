@@ -79,7 +79,7 @@ Busca por string, padrão ou regra YARA direto nas regiões de memória dos proc
 **Sintaxe base:**
 
 ```powershell
-py -3.12 vol.py -f $Mem windows.vadyarascan.VadYaraScan --yara-string "TERMO" | Out-File "$Out\yara_TERMO.txt" -Encoding UTF8
+py -3.12 vol.py -f $Mem windows.vadyarascan.VadYaraScan --yara-string "TERMO|TERMO2|TERMO3" | Out-File "$Out\yara_TERMO.txt" -Encoding UTF8
 ```
 
 **Exemplos de uso real:**
@@ -94,49 +94,7 @@ py -3.12 vol.py -f $Mem windows.vadyarascan.VadYaraScan --yara-string "TERMO" | 
 | Injeção/shellcode | `"VirtualAlloc"`, `"CreateRemoteThread"` |
 | Ransomware | `"YOUR FILES"`, `"decrypt"`, `"bitcoin"` |
 
-**Usando arquivo de regras YARA** (mais poderoso):
-
-```powershell
-# Gerar all_clean.yar filtrando regras incompatíveis com Volatility
-py -3.12 -c "
-import yara, glob, os
-
-yara_dir = r'D:\volatility3\signature-base\yara'
-output = r'D:\volatility3\all_clean.yar'
-skipped = []
-rules = []
-
-for f in glob.glob(yara_dir + r'\*.yar'):
-    try:
-        yara.compile(f)
-        rules.append(open(f, 'r', encoding='utf-8', errors='ignore').read())
-    except Exception as e:
-        skipped.append(os.path.basename(f))
-
-with open(output, 'w', encoding='ascii', errors='ignore') as out:
-    for r in rules:
-        out.write(r)
-        out.write('\n')
-
-print('Skipped:', skipped)
-print(f'Clean rules: {len(rules)}')
-"
-
-# Rodar scan com o arquivo gerado
-py -3.12 vol.py -f $Mem windows.vadyarascan.VadYaraScan --yara-file "all_clean.yar" | Out-File "$Out\yara_full_scan.txt" -Encoding UTF8
-```
-
 > 💡 Regras prontas: [YARA Rules no GitHub](https://github.com/Yara-Rules/rules) | [signature-base (Nextron)](https://github.com/Neo23x0/signature-base) | [Awesome YARA](https://github.com/InQuest/awesome-yara)
-
-**YARA direcionado por IOC (mais eficiente):**
-
-```powershell
-# Strings de IOCs conhecidos (ex: ScreenConnect CVE-2024-1708/1709)
-py -3.12 vol.py -f $Mem windows.vadyarascan.VadYaraScan --yara-string "ScreenConnect|LB3.exe|msappdata.msi|RunSchedulerTaskOnce.ps1|update.dat|spsrv.exe" | Out-File "$Out\yara_screenconnect.txt"
-
-# Paths suspeitos
-py -3.12 vol.py -f $Mem windows.vadyarascan.VadYaraScan --yara-string "C:\\Windows\\TEMP\\ScreenConnect|C:\\perflogs\\RunSchedulerTaskOnce.ps1|C:\\programdata\\update.dat" | Out-File "$Out\yara_paths.txt"
-```
 
 ---
 
@@ -145,38 +103,18 @@ py -3.12 vol.py -f $Mem windows.vadyarascan.VadYaraScan --yara-string "C:\\Windo
 ⚠️ **Apenas com permissão da gestão e em ambiente isolado**
 
 **1. Obter o PID do processo suspeito:**
-
-```powershell
-cat "$Out\windows_pstree_PsTree.txt" | Select-String "nomedoprocesso"
-```
-
 **2. Criar pasta de output:**
-
-```powershell
-mkdir "$Out\procdump" -Force | Out-Null
-```
-
 **3. Rodar o dump:**
 
 ```powershell
 py -3.12 vol.py -f $Mem --pid 1234 --dump -o "$Out\procdump" windows.pslist
 ```
 
-**4. Dump de vários PIDs de uma vez:**
-
-```powershell
-$pids = @(1234, 5678, 9012)
-foreach ($pid in $pids) {
-  Write-Host "Dumpando PID $pid..."
-  py -3.12 vol.py -f $Mem --pid $pid --dump -o "$Out\procdump" windows.pslist
-}
-```
-
-**5. O Volatility gera arquivos tipo `pid.1234.0x400000.dmp`. Próximos passos:**
+**4. O Volatility gera arquivos tipo `pid.1234.0x400000.dmp`. Próximos passos:**
 
 ```powershell
 # Calcular hash de todos os dumps
-Get-FileHash "$Out\procdump\*.exe" -Algorithm SHA256 | Out-File "$Out\procdump\hashes.txt"
+Get-FileHash "$Out\*.exe" -Algorithm SHA256 | Out-File "$Out\hashes.txt"
 
 # YARA local nos dumps (não precisa de Volatility)
 Get-ChildItem "$Out\procdump\*.exe" | ForEach-Object {
