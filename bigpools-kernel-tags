@@ -1,0 +1,154 @@
+vol -f ".mem" windows.bigpools | Select-String "Allocated" | ForEach-Object { ($_ -split '\s+')[1] } | Group-Object | Sort-Object Count -Descending
+Progress:  100.00               PDB scanning finished
+Count Name                      Group
+----- ----                      -----
+ 8501 CM31                      {CM31, CM31, CM31, CM31...}
+ 2320 CM16                      {CM16, CM16, CM16, CM16...}
+ 1036 Cont                      {Cont, Cont, Cont, Cont...}
+  555 CMAl                      {CMAl, CMAl, CMAl, CMAl...}
+  166 MmRe                      {MmRe, MmRe, MmRe, MmRe...}
+  142 MmSt                      {MmSt, MmSt, MmSt, MmSt...}
+   96 Obtb                      {Obtb, Obtb, Obtb, Obtb...}
+   30 CM20                      {CM20, CM20, CM20, CM20...}
+   28 EtwB                      {EtwB, EtwB, EtwB, EtwB...}
+   22 CIcr                      {CIcr, CIcr, CIcr, CIcr...}
+   22 CM29                      {CM29, CM29, CM29, CM29...}
+   19 ClfI                      {ClfI, ClfI, ClfI, ClfI...}
+   19 DxgK                      {DxgK, DxgK, DxgK, DxgK...}
+   19 InPa                      {InPa, InPa, InPa, InPa...}
+   18 Devi                      {Devi, Devi, Devi, Devi...}
+   16 CIsc                      {CIsc, CIsc, CIsc, CIsc...}
+   14 CMCa                      {CMCa, CMCa, CMCa, CMCa...}
+   11 Clfs                      {Clfs, Clfs, Clfs, Clfs...}
+   11 CM32                      {CM32, CM32, CM32, CM32...}
+   10 CM17                      {CM17, CM17, CM17, CM17...}
+   10 CM26                      {CM26, CM26, CM26, CM26...}
+   10 ClfC                      {ClfC, ClfC, ClfC, ClfC...}
+    9 WPLg                      {WPLg, WPLg, WPLg, WPLg...}
+    9 FxLg                      {FxLg, FxLg, FxLg, FxLg...}
+    9 NtFs                      {NtFs, NtFs, NtFs, NtFs...}
+    9 ArbA                      {ArbA, ArbA, ArbA, ArbA...}
+    9 Ntf0                      {Ntf0, Ntf0, Ntf0, Ntf0...}
+    8 IPpa                      {IPpa, IPpa, IPpa, IPpa...}
+    8 LShs                      {LShs, LShs, LShs, LShs...}
+    7 ViMm                      {ViMm, ViMm, ViMm, ViMm...}
+    7 HalB                      {HalB, HalB, HalB, HalB...}
+    5 RpcM                      {RpcM, RpcM, RpcM, RpcM...}
+    5 SMBi                      {SMBi, SMBi, SMBi, SMBi...}
+    5 Pp                        {Pp, Pp, Pp, Pp...}
+    4 iGig                      {iGig, iGig, iGig, iGig}
+    4 IPrq                      {IPrq, IPrq, IPrq, IPrq}
+    4 WDIs                      {WDIs, WDIs, WDIs, WDIs}
+    4 LS00                      {LS00, LS00, LS00, LS00}
+    4 Pmn                       {Pmn, Pmn, Pmn, Pmn}
+    4 IdeP                      {IdeP, IdeP, IdeP, IdeP}
+    4 Pool                      {Pool, Pool, Pool, Pool}
+    4 SmXc                      {SmXc, SmXc, SmXc, SmXc}
+    4 ViSh                      {ViSh, ViSh, ViSh, ViSh}
+    4 AmlC                      {AmlC, AmlC, AmlC, AmlC}
+    3 BDD                       {BDD, BDD, BDD}
+    3 Plcl                      {Plcl, Plcl, Plcl}
+    3 LSfR                      {LSfR, LSfR, LSfR}
+    3 HTab                      {HTab, HTab, HTab}
+    3 Wdog                      {Wdog, Wdog, Wdog}
+    3 FlpS                      {FlpS, FlpS, FlpS}
+    3 SmBf                      {SmBf, SmBf, SmBf}
+    3 CDmp                      {CDmp, CDmp, CDmp}
+    3 IPss                      {IPss, IPss, IPss}
+    2 I4nb                      {I4nb, I4nb}
+    2 LfsS                      {LfsS, LfsS}
+    2 NtFm                      {NtFm, NtFm}
+    2 InPP                      {InPP, InPP}
+    2 Ksec                      {Ksec, Ksec}
+    2 NDpp                      {NDpp, NDpp}
+    2 UlXR                      {UlXR, UlXR}
+    2 CM11                      {CM11, CM11}
+    2 Lfsr                      {Lfsr, Lfsr}
+    2 Txrm                      {Txrm, Txrm}
+    2 I6nb                      {I6nb, I6nb}
+    2 UlOT                      {UlOT, UlOT}
+    2 FlpM                      {FlpM, FlpM}
+    2 CcVa                      {CcVa, CcVa}
+    2 Ipur                      {Ipur, Ipur}
+    2 AfdB                      {AfdB, AfdB}
+    2 AlEB                      {AlEB, AlEB}
+    2 Ipas                      {Ipas, Ipas}
+    1 Pctw                      {Pctw}
+    1 BGIK                      {BGIK}
+    1 NtFL                      {NtFL}
+    1 Ccmt                      {Ccmt}
+    1 UlTW                      {UlTW}
+    1 NtTo                      {NtTo}
+    1 EMit                      {EMit}
+    1 Ke                        {Ke}
+    1 AcpR                      {AcpR}
+    1 SmMm                      {SmMm}
+    1 TcCR                      {TcCR}
+    1 usbp                      {usbp}
+    1 Mm                        {Mm}
+    1 Luaf                      {Luaf}
+    1 LeGe                      {LeGe}
+    1 CM28                      {CM28}
+    1 Whea                      {Whea}
+    1 SmMs                      {SmMs}
+    1 UlCP                      {UlCP}
+    1 I6ai                      {I6ai}
+    1 NDam                      {NDam}
+    1 Prcr                      {Prcr}
+    1 Nhfs                      {Nhfs}
+    1 CM13                      {CM13}
+    1 LS04                      {LS04}
+    1 I4ma                      {I4ma}
+    1 Io                        {Io}
+    1 RhHi                      {RhHi}
+    1 AlIn                      {AlIn}
+    1 MmPb                      {MmPb}
+    1 VmRb                      {VmRb}
+    1 Mmdl                      {Mmdl}
+    1 Nph1                      {Nph1}
+    1 RaMI                      {RaMI}
+    1 AmlH                      {AmlH}
+    1 Mdl                       {Mdl}
+    1 PTPc                      {PTPc}
+    1 UlHT                      {UlHT}
+    1 InF2                      {InF2}
+    1 CM18                      {CM18}
+    1 LS01                      {LS01}
+    1 LSwi                      {LSwi}
+    1 I4ba                      {I4ba}
+    1 WPAD                      {WPAD}
+    1 TcTW                      {TcTW}
+    1 LS19                      {LS19}
+    1 NtfJ                      {NtfJ}
+    1 I6ma                      {I6ma}
+    1 AfdE                      {AfdE}
+    1 CM19                      {CM19}
+    1 Tdx                       {Tdx}
+    1 UdMI                      {UdMI}
+    1 I4ai                      {I4ai}
+    1 InF0                      {InF0}
+    1 WanO                      {WanO}
+    1 FIvp                      {FIvp}
+    1 Tcpt                      {Tcpt}
+    1 WfpC                      {WfpC}
+    1 SmVc                      {SmVc}
+    1 I4ua                      {I4ua}
+    1 Nph2                      {Nph2}
+    1 VmBu                      {VmBu}
+    1 Fwpp                      {Fwpp}
+    1 NtFf                      {NtFf}
+    1 InF1                      {InF1}
+    1 L2T4                      {L2T4}
+    1 I6ua                      {I6ua}
+    1 Nb01                      {Nb01}
+    1 NDif                      {NDif}
+    1 AcpI                      {AcpI}
+    1 WfpS                      {WfpS}
+    1 ClfO                      {ClfO}
+    1 Mmww                      {Mmww}
+    1 NBSf                      {NBSf}
+    1 UHUB                      {UHUB}
+    1 ScCB                      {ScCB}
+
+
+PS D:\volatility3>
