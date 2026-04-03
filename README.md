@@ -116,6 +116,12 @@ py -3.12 vol.py -f $Mem --pid 1234 --dump -o "$Out\procdump" windows.pslist
 # Calcular hash de todos os dumps
 Get-FileHash "$Out\*.exe" -Algorithm SHA256 | Out-File "$Out\hashes.txt"
 
+# Procurar Strings Nos Dumps (Com Strings - Sysinternals)
+strings64.exe -n 6 pid.1800.dmp.raw > strings1800.txt
+ou ...
+Get-ChildItem *PID* | Get-Content | Where-Object { $_ -match '[a-zA-Z]{4,}' } | Select-Object -First 50
+
+
 # YARA local nos dumps (não precisa de Volatility)
 Get-ChildItem "$Out\procdump\*.exe" | ForEach-Object {
   yara "D:\volatility3\signature-base\yara\apt_*.yar" $_.FullName
