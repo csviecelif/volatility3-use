@@ -38,7 +38,7 @@ $plugins = @(
   "windows.ssdt.SSDT","windows.driverirp.DriverIrp","windows.ldrmodules.LdrModules",
   "windows.bigpools.BigPools","windows.desktops.Desktops",
   "windows.skeleton_key_check.Skeleton_Key_Check","windows.joblinks.JobLinks",
-  "windows.verinfo.VerInfo","windows.filescan.FileScan","windows.mbrscan.MBRScan",
+  "windows.verinfo.VerInfo","windows.filescan.FileScan","windows.consoles.Consoles","windows.cmdscan.CmdScan","windows.mbrscan.MBRScan",
   "windows.mutantscan.MutantScan","timeliner.Timeliner","windows.psscan.PsScan",
   "windows.handles.Handles","windows.orphan_kernel_threads.Threads","windows.psxview.PsXView",
   "windows.deskscan.DeskScan","windows.devicetree.DeviceTree","windows.malware.svcdiff.SvcDiff",
